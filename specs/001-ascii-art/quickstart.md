@@ -36,6 +36,12 @@ Supported options:
 - `--strict`
 - `--list-fonts`
 
+Current built-in fonts:
+
+- `big-money-ne` (11 lines, default)
+- `basicblock` (8 lines)
+- `caligraphy` (21 lines)
+
 Examples:
 
 ```bash
@@ -57,6 +63,8 @@ dotnet run --project src/AsciiArt.Cli -- --strict "Hi<unicode>"
 ```bash
 dotnet test AsciiArt.sln --no-restore
 ```
+
+Note: after recent FIGlet font updates, some existing assertions may need expectation refresh.
 
 ## Architecture Snapshot
 

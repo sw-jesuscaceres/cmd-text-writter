@@ -24,12 +24,13 @@ Represents a renderable ASCII font.
 
 - `BigMoneyNeFont` (default)
 - `BasicBlockFont`
+- `CaligraphyFont`
 
 ---
 
 ## Entity 2: Parsed FIGlet Font (`ParsedFont`)
 
-Internal representation used by `BigMoneyNeFont`.
+Internal representation used by FIGlet-backed fonts.
 
 ### Attributes
 
@@ -39,6 +40,7 @@ Internal representation used by `BigMoneyNeFont`.
 ### Source
 
 - Built from embedded `.flf` content through `FigletFontParser`
+- Used by `BigMoneyNeFont`, `BasicBlockFont`, and `CaligraphyFont`
 
 ---
 

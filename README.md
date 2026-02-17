@@ -5,7 +5,8 @@
 ## Features
 
 - Render text from CLI arguments: `asciiart "Hello"`
-- Support for letters (`A-Z`, `a-z`), digits (`0-9`), and spaces
+- Built-in fonts: `big-money-ne` (default), `basicblock`, `caligraphy`
+- Supports printable ASCII characters from the selected font
 - Help output: `asciiart --help`
 - Warning handling for unsupported characters (placeholder rendering)
 - Strict mode: `asciiart --strict "Hi!"`

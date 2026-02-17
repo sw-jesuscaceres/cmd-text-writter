@@ -98,8 +98,8 @@ Example output:
 
 ```text
 big-money-ne (11 lines)
-basicblock (5 lines)
-caligraphy (3 lines)
+basicblock (8 lines)
+caligraphy (21 lines)
 ```
 
 ### 4) Unknown option

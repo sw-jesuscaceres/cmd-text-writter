@@ -1,4 +1,5 @@
 using AsciiArt.Cli;
+using AsciiArt.Fonts;
 using FluentAssertions;
 
 namespace AsciiArt.Cli.Tests;
@@ -124,15 +125,21 @@ public sealed class ApplicationExecutionTests
     }
 
     [Fact]
-    public void Run_WithcaligraphyFont_PrintsAsciiArtAndReturnsZero()
+    public void Run_WithCaligraphyFont_PrintsAsciiArtAndReturnsZero()
     {
         var stdout = new StringWriter();
         var stderr = new StringWriter();
 
         var code = app.Run(new[] { "--font", "caligraphy", "Hi" }, stdout, stderr);
 
+        var output = stdout.ToString().Replace("\r", string.Empty, StringComparison.Ordinal);
+        var lines = output.EndsWith('\n')
+            ? output[..^1].Split('\n', StringSplitOptions.None)
+            : output.Split('\n', StringSplitOptions.None);
+
         code.Should().Be(0);
-        stdout.ToString().Should().Contain("|H||I|");
+        lines.Should().HaveCount(new CaligraphyFont().Height);
+        lines.Should().Contain(line => !string.IsNullOrWhiteSpace(line));
         stderr.ToString().Should().BeEmpty();
     }
 

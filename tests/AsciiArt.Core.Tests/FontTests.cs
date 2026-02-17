@@ -22,7 +22,7 @@ public sealed class FontTests
     {
         var font = new BasicBlockFont();
 
-        var unsupportedGlyph = font.GetGlyph('@');
+        var unsupportedGlyph = font.GetGlyph('\u0100');
         var placeholderGlyph = font.GetGlyph('?');
 
         unsupportedGlyph.Should().Equal(placeholderGlyph);

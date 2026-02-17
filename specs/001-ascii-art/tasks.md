@@ -28,8 +28,9 @@ description: "Implementation tasks and current status for ASCII Text Art Command
 
 - [x] Implement `BasicBlockFont`
 - [x] Implement `BigMoneyNeFont` (FIGlet-based)
+- [x] Implement `CaligraphyFont` (FIGlet-based)
 - [x] Add `FigletFontParser`
-- [x] Embed `BigMoney-ne.flf` as resource
+- [x] Embed FIGlet resources from `Resources/*.flf`
 - [x] Register fonts in `FontRegistry`
 - [x] Set default font to `big-money-ne`
 
@@ -69,5 +70,5 @@ description: "Implementation tasks and current status for ASCII Text Art Command
 
 ## Validation Snapshot
 
-- Automated tests: passing (`dotnet test AsciiArt.sln --no-restore`)
+- Automated tests: currently failing after recent font changes (`dotnet test AsciiArt.sln --no-restore`)
 - Manual smoke test: `dotnet run --project src/AsciiArt.Cli -- "Hello world"` matches expected banner style

@@ -3,7 +3,7 @@
 **Branch**: `001-ascii-art`  
 **Date**: 2026-02-17  
 **Spec**: [spec.md](spec.md)  
-**Status**: Implemented and validated against automated tests
+**Status**: Implemented; CLI behavior validated, some automated tests require expectation updates after recent font changes
 
 ## Summary
 
@@ -43,9 +43,12 @@ src/
 +-- AsciiArt.Fonts/
     +-- BasicBlockFont.cs
     +-- BigMoneyNeFont.cs
+    +-- CaligraphyFont.cs
     +-- FigletFontParser.cs
     +-- FontRegistry.cs
     +-- Resources/BigMoney-ne.flf
+    +-- Resources/Block.flf
+    +-- Resources/Caligraphy.flf
 
 tests/
 +-- AsciiArt.Core.Tests/
@@ -67,8 +70,8 @@ tests/
 - Multiple font implementations with a single renderer
 - New fonts can be added by registering in `FontRegistry`
 
-3. **Embedded FIGlet resource for default style**
-- `BigMoney-ne.flf` is bundled in assembly resources
+3. **Embedded FIGlet resources for built-in styles**
+- `Resources/*.flf` is bundled in assembly resources
 - `FigletFontParser` translates FIGlet data into glyph maps
 
 4. **Explicit CLI exit-code contract**
@@ -79,7 +82,7 @@ tests/
 ## Constitution Check (Current)
 
 - **Code Quality**: PASS (modular and documented public APIs)
-- **Testing**: PASS (unit + integration tests implemented)
+- **Testing**: PARTIAL (unit + integration tests implemented; assertions need refresh for recent FIGlet font output changes)
 - **UX Consistency**: PASS (uniform help/error formatting)
 - **Performance**: PASS (tests include <200ms renderer check for standard input)
 

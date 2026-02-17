@@ -36,3 +36,4 @@
 
 - Original design target of 80-column width was superseded by current implementation requirement to support FIGlet `big-money-ne` output width.
 - This checklist validates documentation alignment with current code, not historical planning assumptions.
+- Current known gap: some automated tests still assume old font shapes/heights and need expectation updates.

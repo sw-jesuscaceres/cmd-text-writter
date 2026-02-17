@@ -81,7 +81,7 @@ public sealed class AsciiRendererTests
     {
         var text = new string('A', 40);
 
-        var result = renderer.Render(text, new BasicBlockFont());
+        var result = renderer.Render(text, new MockFont());
 
         result.Success.Should().BeTrue();
         result.Lines.Should().OnlyContain(line => line.Length <= AsciiRenderer.MaxOutputWidth);
@@ -92,7 +92,7 @@ public sealed class AsciiRendererTests
     {
         var text = new string('A', 151);
 
-        var result = renderer.Render(text, new BasicBlockFont());
+        var result = renderer.Render(text, new MockFont());
 
         result.Success.Should().BeFalse();
         result.Warnings.Should().ContainSingle();

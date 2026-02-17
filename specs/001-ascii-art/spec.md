@@ -3,7 +3,7 @@
 **Feature Branch**: `001-ascii-art`  
 **Created**: 2026-02-17  
 **Last Updated**: 2026-02-17  
-**Status**: Implemented (aligned with current codebase)
+**Status**: Implemented (aligned with current codebase; some automated test expectations need refresh after font updates)
 
 ## User Scenarios & Testing
 
@@ -111,6 +111,7 @@ As a technical writer, I want output that is legible and bounded so terminal dis
 - App targets current local SDK/runtime configuration (`net6.0` in this repository)
 - Output is plain text and terminal-safe (no color control sequences)
 - Default style is `big-money-ne` (FIGlet-based)
+- Additional built-in styles are `basicblock` and `caligraphy` (FIGlet-based)
 
 ## Out of Scope
 

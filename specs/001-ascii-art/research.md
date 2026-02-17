@@ -22,8 +22,10 @@ Record the decisions reflected by the current implementation and replace pre-imp
 - **Reason**: required output style for `Hello world`
 - **Implementation**:
   - Embedded resource: `Resources/BigMoney-ne.flf`
+  - Additional built-in FIGlet resources: `Resources/Block.flf`, `Resources/Caligraphy.flf`
   - Parser: `FigletFontParser`
   - Font class: `BigMoneyNeFont`
+  - Additional font classes: `BasicBlockFont`, `CaligraphyFont`
 
 ### 3. Width constraint
 
