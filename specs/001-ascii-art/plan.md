@@ -3,7 +3,7 @@
 **Branch**: `001-ascii-art`  
 **Date**: 2026-02-17  
 **Spec**: [spec.md](spec.md)  
-**Status**: Implemented; CLI behavior validated, some automated tests require expectation updates after recent font changes
+**Status**: Implemented and validated against automated tests
 
 ## Summary
 
@@ -82,7 +82,7 @@ tests/
 ## Constitution Check (Current)
 
 - **Code Quality**: PASS (modular and documented public APIs)
-- **Testing**: PARTIAL (unit + integration tests implemented; assertions need refresh for recent FIGlet font output changes)
+- **Testing**: PASS (unit + integration tests implemented)
 - **UX Consistency**: PASS (uniform help/error formatting)
 - **Performance**: PASS (tests include <200ms renderer check for standard input)
 

@@ -3,7 +3,7 @@
 **Feature Branch**: `001-ascii-art`  
 **Created**: 2026-02-17  
 **Last Updated**: 2026-02-17  
-**Status**: Implemented (aligned with current codebase; some automated test expectations need refresh after font updates)
+**Status**: Implemented (aligned with current codebase)
 
 ## User Scenarios & Testing
 

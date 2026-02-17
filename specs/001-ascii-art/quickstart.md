@@ -64,8 +64,6 @@ dotnet run --project src/AsciiArt.Cli -- --strict "Hi<unicode>"
 dotnet test AsciiArt.sln --no-restore
 ```
 
-Note: after recent FIGlet font updates, some existing assertions may need expectation refresh.
-
 ## Architecture Snapshot
 
 ```text

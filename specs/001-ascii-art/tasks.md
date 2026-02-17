@@ -70,5 +70,5 @@ description: "Implementation tasks and current status for ASCII Text Art Command
 
 ## Validation Snapshot
 
-- Automated tests: currently failing after recent font changes (`dotnet test AsciiArt.sln --no-restore`)
+- Automated tests: passing (`dotnet test AsciiArt.sln --no-restore`)
 - Manual smoke test: `dotnet run --project src/AsciiArt.Cli -- "Hello world"` matches expected banner style
