@@ -88,9 +88,9 @@ public sealed class AsciiRendererTests
     }
 
     [Fact]
-    public void Render_WithSeventyCharacters_ReturnsWidthError()
+    public void Render_WithOneHundredFiftyOneCharacters_ReturnsWidthError()
     {
-        var text = new string('A', 70);
+        var text = new string('A', 151);
 
         var result = renderer.Render(text, new BasicBlockFont());
 

@@ -29,6 +29,7 @@ asciiart [options] <text>
 
 - `big-money-ne` (default)
 - `basicblock`
+- `caligraphy`
 
 ## Exit Codes
 
@@ -98,6 +99,7 @@ Example output:
 ```text
 big-money-ne (11 lines)
 basicblock (5 lines)
+caligraphy (3 lines)
 ```
 
 ### 4) Unknown option

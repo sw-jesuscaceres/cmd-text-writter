@@ -3,14 +3,14 @@ using AsciiArt.Core;
 namespace AsciiArt.Fonts;
 
 /// <summary>
-/// FIGlet font based on BasicBlock.
+/// FIGlet font based on Caligraphy.
 /// </summary>
-public sealed class BasicBlockFont : IAsciiFont
+public sealed class CaligraphyFont : IAsciiFont
 {
     private static readonly ParsedFont Parsed = FigletFontParser.Parse(LoadFontText());
 
     /// <inheritdoc />
-    public string Name => "basicblock";
+    public string Name => "caligraphy";
 
     /// <inheritdoc />
     public int Height => Parsed.Height;
@@ -37,8 +37,8 @@ public sealed class BasicBlockFont : IAsciiFont
 
     private static string LoadFontText()
     {
-        const string resourceName = "AsciiArt.Fonts.Resources.Block.flf";
-        using var stream = typeof(BasicBlockFont).Assembly.GetManifestResourceStream(resourceName)
+        const string resourceName = "AsciiArt.Fonts.Resources.Caligraphy.flf";
+        using var stream = typeof(CaligraphyFont).Assembly.GetManifestResourceStream(resourceName)
             ?? throw new InvalidOperationException($"Embedded font resource '{resourceName}' was not found.");
 
         using var reader = new StreamReader(stream);

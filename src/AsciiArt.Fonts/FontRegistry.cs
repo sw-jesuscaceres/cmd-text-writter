@@ -11,6 +11,7 @@ public static class FontRegistry
     {
         ["big-money-ne"] = new BigMoneyNeFont(),
         ["basicblock"] = new BasicBlockFont(),
+        ["caligraphy"] = new CaligraphyFont(),
     };
 
     /// <summary>

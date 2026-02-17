@@ -64,7 +64,7 @@ description: "Implementation tasks and current status for ASCII Text Art Command
 
 - [ ] Add publish profile / release automation
 - [ ] Add CI workflow for build + test
-- [ ] Add snapshot tests for both fonts across full charset
+- [ ] Add snapshot tests for all built-in fonts across full charset
 - [ ] Add benchmark project for startup + rendering
 
 ## Validation Snapshot

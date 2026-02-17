@@ -44,6 +44,7 @@ public sealed class FontTests
         FontRegistry.DefaultFont.Name.Should().Be("big-money-ne");
         FontRegistry.GetFont("big-money-ne").Should().NotBeNull();
         FontRegistry.GetFont("basicblock").Should().NotBeNull();
+        FontRegistry.GetFont("caligraphy").Should().NotBeNull();
         FontRegistry.ListFonts().Should().NotBeEmpty();
     }
 }

@@ -10,7 +10,8 @@
 - Warning handling for unsupported characters (placeholder rendering)
 - Strict mode: `asciiart --strict "Hi!"`
 - Font listing: `asciiart --list-fonts`
-- Terminal safety constraints: width `<= 80`, height `<= 24`
+- Font selection: `asciiart --font caligraphy "Hello"`
+- Terminal safety constraints: width `<= 300`, height `<= 24`
 
 ## Build
 
@@ -23,6 +24,8 @@ dotnet build AsciiArt.sln
 ```bash
 dotnet run --project src/AsciiArt.Cli -- "Hello World"
 dotnet run --project src/AsciiArt.Cli -- --help
+dotnet run --project src/AsciiArt.Cli -- --list-fonts
+dotnet run --project src/AsciiArt.Cli -- --font caligraphy "Hello"
 ```
 
 ## Test

@@ -11,7 +11,7 @@ The application is implemented as a three-layer .NET solution:
 
 - `AsciiArt.Cli`: command parsing, output streams, user-facing errors/help
 - `AsciiArt.Core`: rendering engine and result model
-- `AsciiArt.Fonts`: built-in fonts (`big-money-ne`, `basicblock`) and registry
+- `AsciiArt.Fonts`: built-in fonts (`big-money-ne`, `basicblock`, `caligraphy`) and registry
 
 Current behavior is optimized for deterministic CLI output and testability.
 

@@ -119,6 +119,20 @@ public sealed class ApplicationExecutionTests
         code.Should().Be(0);
         stdout.ToString().Should().Contain("big-money-ne");
         stdout.ToString().Should().Contain("basicblock");
+        stdout.ToString().Should().Contain("caligraphy");
+        stderr.ToString().Should().BeEmpty();
+    }
+
+    [Fact]
+    public void Run_WithcaligraphyFont_PrintsAsciiArtAndReturnsZero()
+    {
+        var stdout = new StringWriter();
+        var stderr = new StringWriter();
+
+        var code = app.Run(new[] { "--font", "caligraphy", "Hi" }, stdout, stderr);
+
+        code.Should().Be(0);
+        stdout.ToString().Should().Contain("|H||I|");
         stderr.ToString().Should().BeEmpty();
     }
 

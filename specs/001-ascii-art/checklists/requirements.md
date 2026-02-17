@@ -17,6 +17,7 @@
 - [x] Error and warning behavior documented with stream usage (`stdout` vs `stderr`)
 - [x] Default font documented as `big-money-ne`
 - [x] Alternate font documented as `basicblock`
+- [x] Additional built-in font documented as `caligraphy`
 - [x] Unsupported Unicode handling documented (placeholder / strict fail)
 
 ## Contract Alignment

@@ -32,6 +32,7 @@ As a terminal user, I want standard command-line options so I can use the tool i
 1. **Given** the user runs `asciiart --help`, **When** the command executes, **Then** usage and options are printed and exit code is 0
 2. **Given** the user runs `asciiart --list-fonts`, **When** the command executes, **Then** all registered fonts are printed and exit code is 0
 3. **Given** the user runs `asciiart --font basicblock "Hello"`, **When** the font exists, **Then** output is rendered using that font
+4. **Given** the user runs `asciiart --font caligraphy "Hello"`, **When** the font exists, **Then** output is rendered using that font
 
 ---
 
@@ -100,7 +101,7 @@ As a technical writer, I want output that is legible and bounded so terminal dis
 
 - **SC-001**: `asciiart "Hello world"` prints the expected `big-money-ne` banner
 - **SC-002**: `asciiart --help` returns 0 and prints usage/options text
-- **SC-003**: `asciiart --list-fonts` returns 0 and includes `big-money-ne` and `basicblock`
+- **SC-003**: `asciiart --list-fonts` returns 0 and includes `big-money-ne`, `basicblock`, and `caligraphy`
 - **SC-004**: Missing text returns exit code 1 with actionable error format
 - **SC-005**: Unknown option returns exit code 2 with actionable usage message
 - **SC-006**: Automated tests pass for renderer behavior, parser behavior, and CLI integration

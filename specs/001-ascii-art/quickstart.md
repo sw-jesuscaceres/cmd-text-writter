@@ -42,6 +42,7 @@ Examples:
 dotnet run --project src/AsciiArt.Cli -- --help
 dotnet run --project src/AsciiArt.Cli -- --list-fonts
 dotnet run --project src/AsciiArt.Cli -- --font basicblock "Hello"
+dotnet run --project src/AsciiArt.Cli -- --font caligraphy "Hello"
 dotnet run --project src/AsciiArt.Cli -- --strict "Hi<unicode>"
 ```
 
