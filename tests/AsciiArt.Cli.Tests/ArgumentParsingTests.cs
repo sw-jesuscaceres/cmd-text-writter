@@ -112,4 +112,40 @@ public sealed class ArgumentParsingTests
 
         options.Color.Should().Be(ColorOption.Blue);
     }
+
+    [Fact]
+    public void Parse_WithColorRed_ParsesAndIncludesAccessibilityWarning()
+    {
+        var options = parser.Parse(new[] { "--color", "red", "Hello" });
+
+        options.IsValid.Should().BeTrue();
+        options.Color.Should().Be(ColorOption.Red);
+        options.AccessibilityWarning.Should().NotBeNull();
+        options.AccessibilityWarning.Should().Contain("colorblind");
+    }
+
+    [Fact]
+    public void Parse_WithColorHelp_SetsColorHelpFlag()
+    {
+        var options = parser.Parse(new[] { "--color", "help" });
+
+        options.ShowColorHelp.Should().BeTrue();
+    }
+
+    [Fact]
+    public void Parse_WithShortColorHelp_SetsColorHelpFlag()
+    {
+        var options = parser.Parse(new[] { "-c", "help" });
+
+        options.ShowColorHelp.Should().BeTrue();
+    }
+
+    [Fact]
+    public void Parse_WithInvalidColorNearValidName_IncludesSuggestion()
+    {
+        var options = parser.Parse(new[] { "--color", "redd", "Hello" });
+
+        options.IsValid.Should().BeFalse();
+        options.ErrorMessage.Should().Contain("Did you mean");
+    }
 }

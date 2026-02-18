@@ -31,6 +31,7 @@ public static class HelpFormatter
             "Options:",
             "  --help, -h            Show this help message and exit",
             "  --font <name>         Choose a built-in font",
+            "  --color <name>        Apply a color to the output (use --color help for details)",
             "  --strict              Fail if unsupported characters are found",
             "  --list-fonts          List available fonts",
             string.Empty,
@@ -40,7 +41,41 @@ public static class HelpFormatter
             string.Empty,
             "Examples:",
             "  asciiart \"Hello\"",
+            "  asciiart --color green \"Hello\"",
             "  asciiart --help");
+    }
+
+    /// <summary>
+    /// Builds the color help message.
+    /// </summary>
+    /// <returns>Color help text.</returns>
+    public static string BuildColorHelp()
+    {
+        return string.Join(
+            Environment.NewLine,
+            "Available Colors:",
+            string.Empty,
+            "  red      - Bright red (⚠️  accessibility note: difficult for some colorblind users)",
+            "  green    - Bright green (⚠️  accessibility note: difficult for some colorblind users)",
+            "  blue     - Bright blue",
+            "  yellow   - Bright yellow",
+            "  magenta  - Bright magenta",
+            "  cyan     - Bright cyan (✓ recommended for colorblind accessibility)",
+            "  white    - Bright white (✓ recommended for colorblind accessibility)",
+            "  black    - Black text (on suitable backgrounds)",
+            string.Empty,
+            "Usage:",
+            "  asciiart --color <name> \"Your text\"",
+            "  asciiart -c <name> \"Your text\"",
+            string.Empty,
+            "Accessibility:",
+            "  For colorblind-friendly output, prefer: cyan, yellow, white",
+            "  The application will warn you if you choose red or green.",
+            string.Empty,
+            "Examples:",
+            "  asciiart --color red \"Hello\"",
+            "  asciiart -c cyan \"World\"",
+            "  asciiart --color help");
     }
 
     /// <summary>

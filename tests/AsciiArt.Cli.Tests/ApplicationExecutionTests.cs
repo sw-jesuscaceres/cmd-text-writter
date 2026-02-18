@@ -158,17 +158,18 @@ public sealed class ApplicationExecutionTests
     }
 
     [Fact]
-    public void Run_WithValidColorParameter_OutputContainsAnsiCodes()
+    public void Run_WithValidColorParameter_OutputContainsAsciiArt()
     {
         var stdout = new StringWriter();
         var stderr = new StringWriter();
 
         // Note: Console.IsOutputRedirected will be true for StringWriter, so colors won't be applied
         // This test is for parsing; actual color output would require terminal interaction
-        var code = app.Run(new[] { "--color", "red", "Hi" }, stdout, stderr);
+        var code = app.Run(new[] { "--color", "blue", "Hi" }, stdout, stderr);
 
         code.Should().Be(0);
         stdout.ToString().Should().NotBeEmpty();
+        // No warning for blue (accessible color)
         stderr.ToString().Should().BeEmpty();
     }
 
@@ -195,7 +196,7 @@ public sealed class ApplicationExecutionTests
     [InlineData("cyan")]
     [InlineData("white")]
     [InlineData("black")]
-    public void Run_WithAllValidColors_ReturnsZero(string color)
+    public void Run_WithAllValidColors_ReturnsZeroAndGeneratesOutput(string color)
     {
         var stdout = new StringWriter();
         var stderr = new StringWriter();
@@ -204,6 +205,51 @@ public sealed class ApplicationExecutionTests
 
         code.Should().Be(0);
         stdout.ToString().Should().NotBeEmpty();
-        stderr.ToString().Should().BeEmpty();
+
+        // Red and green may have accessibility warnings on stderr
+        if (color != "red" && color != "green")
+        {
+            stderr.ToString().Should().BeEmpty();
+        }
+    }
+
+    [Fact]
+    public void Run_WithColorRed_DisplaysAccessibilityWarning()
+    {
+        var stdout = new StringWriter();
+        var stderr = new StringWriter();
+
+        var code = app.Run(new[] { "--color", "red", "A" }, stdout, stderr);
+
+        code.Should().Be(0);
+        stderr.ToString().Should().Contain("colorblind");
+    }
+
+    [Fact]
+    public void Run_WithColorHelp_DisplaysColorList()
+    {
+        var stdout = new StringWriter();
+        var stderr = new StringWriter();
+
+        var code = app.Run(new[] { "--color", "help" }, stdout, stderr);
+
+        code.Should().Be(0);
+        stdout.ToString().Should().Contain("red");
+        stdout.ToString().Should().Contain("green");
+        stdout.ToString().Should().Contain("cyan");
+        stdout.ToString().Should().Contain("Accessibility");
+    }
+
+    [Fact]
+    public void Run_WithInvalidColorClose_SuggestsCorrectColor()
+    {
+        var stdout = new StringWriter();
+        var stderr = new StringWriter();
+
+        var code = app.Run(new[] { "--color", "redd", "A" }, stdout, stderr);
+
+        code.Should().Be(2);
+        stderr.ToString().Should().Contain("Error:");
+        stderr.ToString().Should().Contain("Did you mean");
     }
 }
