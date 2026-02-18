@@ -11,11 +11,13 @@ public sealed class RenderResult
     /// <param name="lines">Rendered lines.</param>
     /// <param name="warnings">Warning or error messages.</param>
     /// <param name="success">Whether the render succeeded.</param>
-    public RenderResult(IReadOnlyList<string> lines, IReadOnlyList<string> warnings, bool success)
+    /// <param name="color">Optional color for rendering output.</param>
+    public RenderResult(IReadOnlyList<string> lines, IReadOnlyList<string> warnings, bool success, ColorOption? color = null)
     {
         Lines = lines ?? throw new ArgumentNullException(nameof(lines));
         Warnings = warnings ?? throw new ArgumentNullException(nameof(warnings));
         Success = success;
+        Color = color;
     }
 
     /// <summary>
@@ -32,6 +34,11 @@ public sealed class RenderResult
     /// Gets a value indicating whether the render completed successfully.
     /// </summary>
     public bool Success { get; }
+
+    /// <summary>
+    /// Gets the optional color for output rendering.
+    /// </summary>
+    public ColorOption? Color { get; }
 
     /// <summary>
     /// Creates a successful result.

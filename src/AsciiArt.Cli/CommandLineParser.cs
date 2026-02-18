@@ -1,5 +1,8 @@
 namespace AsciiArt.Cli;
 
+using AsciiArt.Core;
+using AsciiArt.Cli.ColorSupport;
+
 /// <summary>
 /// Parses command-line arguments for the ASCII art CLI.
 /// </summary>
@@ -42,6 +45,43 @@ public sealed class CommandLineParser
 
                     index++;
                     options.FontName = safeArgs[index];
+                    break;
+                case "--color":
+                case "-c":
+                    if (index + 1 >= safeArgs.Length || safeArgs[index + 1].StartsWith("-", StringComparison.Ordinal))
+                    {
+                        options.IsValid = false;
+                        options.ErrorMessage = "Missing value for --color option.";
+                        return options;
+                    }
+
+                    index++;
+                    var colorString = safeArgs[index];
+
+                    // Handle special case: --color help or -c help
+                    if (colorString.Equals("help", StringComparison.OrdinalIgnoreCase))
+                    {
+                        options.ShowColorHelp = true;
+                        return options;
+                    }
+
+                    // Validate the color using ColorValidator
+                    var validationResult = ColorValidator.Validate(colorString);
+                    if (!validationResult.IsValid)
+                    {
+                        options.IsValid = false;
+                        options.ErrorMessage = validationResult.Message ?? "Invalid color.";
+                        return options;
+                    }
+
+                    options.Color = validationResult.Color;
+
+                    // Store accessibility warning if present
+                    if (validationResult.Message != null)
+                    {
+                        options.AccessibilityWarning = validationResult.Message;
+                    }
+
                     break;
                 default:
                     if (token.StartsWith("-", StringComparison.Ordinal))

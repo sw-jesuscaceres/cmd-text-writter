@@ -57,6 +57,12 @@ public sealed class AsciiArtApplication
                 return 0;
             }
 
+            if (options.ShowColorHelp)
+            {
+                output.WriteLine(HelpFormatter.BuildColorHelp());
+                return 0;
+            }
+
             if (options.ListFonts)
             {
                 foreach (var registeredFont in FontRegistry.ListFonts())
@@ -101,7 +107,13 @@ public sealed class AsciiArtApplication
 
             foreach (var line in result.Lines)
             {
-                output.WriteLine(line);
+                output.WriteLineColored(line, options.Color);
+            }
+
+            // Display accessibility warning if present
+            if (!string.IsNullOrEmpty(options.AccessibilityWarning))
+            {
+                output.WriteErrorLine(options.AccessibilityWarning);
             }
 
             foreach (var warning in result.Warnings)

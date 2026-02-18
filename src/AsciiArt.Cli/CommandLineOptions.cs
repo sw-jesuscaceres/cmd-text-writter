@@ -1,3 +1,5 @@
+using AsciiArt.Core;
+
 namespace AsciiArt.Cli;
 
 /// <summary>
@@ -26,6 +28,11 @@ public sealed class CommandLineOptions
     public bool ShowHelp { get; set; }
 
     /// <summary>
+    /// Gets or sets a value indicating whether color Help was requested.
+    /// </summary>
+    public bool ShowColorHelp { get; set; }
+
+    /// <summary>
     /// Gets or sets a value indicating whether the list-fonts mode was requested.
     /// </summary>
     public bool ListFonts { get; set; }
@@ -44,4 +51,14 @@ public sealed class CommandLineOptions
     /// Gets or sets the text to render.
     /// </summary>
     public string? Text { get; set; }
+
+    /// <summary>
+    /// Gets or sets the optional color for text rendering.
+    /// </summary>
+    public ColorOption? Color { get; set; }
+
+    /// <summary>
+    /// Gets or sets an optional accessibility warning message.
+    /// </summary>
+    public string? AccessibilityWarning { get; set; }
 }
