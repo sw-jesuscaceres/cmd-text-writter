@@ -7,13 +7,14 @@
 
 ## Overview
 
-**Total Tasks**: 32  
-**Parallel Opportunities**: 14 tasks can run in parallel after foundational work  
-**MVP Scope**: User Stories 1-2 (P1): Core color functionality + backward compatibility  
-**Extended Scope**: User Stories 3-4 (P2): Discoverability + validation
+**Total Tasks**: 138  
+**Parallel Opportunities**: 54 tasks can run in parallel (marked with [P])  
+**MVP Scope**: User Stories 1-2 (P1): Core color functionality + backward compatibility (58 tasks, ~5-6 hours)  
+**Extended Scope**: User Stories 3-4 (P2): Discoverability + validation (80 additional tasks, ~7-11 hours)
 
 **Estimated Duration**:
-- Phase 1-2 (Setup + Foundational): 2-3 hours
+- Phase 1 (Setup): 30 min
+- Phase 2 (Foundational): 2-3 hours (subtotal: 2.5-3.5 hours)
 - Phase 3 (US1): 3-4 hours
 - Phase 4 (US2): 1-2 hours  
 - Phase 5 (US3): 2-3 hours
@@ -305,7 +306,8 @@ graph TD
 - [ ] T127 Run code formatter to ensure consistent style
 - [ ] T128 Code review: Ensure ANSI codes are correct per research.md
 - [ ] T129 Review error messages against contracts/cli.md specification
-- [ ] T130 Update README.md with color parameter examples and usage
+- [ ] T130 Update README.md with color parameter documentation
+  - Acceptance: Include all 8 color names, --color help usage, accessibility notes, link to [contracts/cli.md](contracts/cli.md) for comprehensive documentation
 
 ### Subtask: Final Testing & Validation
 

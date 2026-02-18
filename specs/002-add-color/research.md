@@ -13,6 +13,7 @@
 ### Findings
 
 **ANSI Escape Codes (Recommended)**:
+
 - Standard format: `\x1b[<code>m` (e.g., `\x1b[31m` for red)
 - **Native support in .NET 6**: `System.Console` has built-in ANSI support via `Console.IsOutputRedirected`
 - **Windows 10+ support**: Native ANSI support enabled by default in Windows Terminal and modern CMD
@@ -21,6 +22,7 @@
 - **Fallback behavior**: Output is automatically stripped when piped (detected via `Console.IsOutputRedirected`)
 
 **Windows Console API Alternative**:
+
 - Uses `SetConsoleTextAttribute()` with color codes (FOREGROUND_RED = 0x0004, etc.)
 - Requires P/Invoke and platform detection
 - Only works on Windows; requires separate implementation for other platforms
@@ -28,6 +30,7 @@
 - Unnecessary complexity for modern .NET
 
 **Decision**: ✅ **Use ANSI escape codes**
+
 - Rationale: Single implementation works across all platforms; .NET 6 handles automatic stripping
 - Implementation: 8 basic colors use codes 30-37 (foreground) with reset code 39
 - No external dependencies needed; use `System.Console` exclusively
@@ -54,19 +57,21 @@ Console.Write(coloredText);  // ANSI codes auto-stripped if output is piped
 ### Findings
 
 **Common Types of Color Blindness**:
+
 1. **Protanopia (Red-Green Blindness)**: ~0.6% of males
    - Cannot distinguish red from green
    - Can distinguish blue/purple/yellow
-   
+
 2. **Deuteranopia (Red-Green Blindness)**: ~0.4% of males
    - Cannot distinguish red/orange from brown/green
    - Can clearly see blue and yellow
-   
+
 3. **Tritanopia (Blue-Yellow Blindness)**: <0.001% (very rare)
    - Cannot distinguish blue from yellow
    - Can see red and green
 
 **WCAG 2.1 Accessibility Guidelines**:
+
 - Minimum contrast ratio of 4.5:1 for normal text
 - Color should not be the only means of conveying information
 - Accessible color palette strategies:
@@ -75,18 +80,21 @@ Console.Write(coloredText);  // ANSI codes auto-stripped if output is piped
   - Test with Ishihara color blindness tests
 
 **Recommended Safe Color Combinations for Terminal**:
+
 | Background | Safe Foreground Colors | Avoid |
 |------------|------------------------|-------|
 | Black (terminal default) | Cyan, Yellow, White, Green | Red, Magenta (low contrast) |
 | White | Black, Red, Blue, Green | Yellow (insufficient contrast) |
 
 **Cross-checking Tool Recommendation**:
+
 - Use color distance formula (Delta E in LAB color space) or simple contrast ratio calculation
 - For CLI with standard terminal colors, validate against: Does NOT use red/green together as only difference
 
 **Decision**: ✅ **Implement colorblind validation at input level**
+
 - Rationale: Warn users when their color choice may be problematic; suggest alternatives
-- Implementation: 
+- Implementation:
   - Create `ColorblindHelper.cs` with validation logic
   - For red selections: suggest cyan, yellow, or white as alternatives
   - For green selections: suggest cyan, yellow, or white as alternatives
@@ -108,6 +116,7 @@ Console.Write(coloredText);  // ANSI codes auto-stripped if output is piped
 ### Findings
 
 **.NET 6 Console Properties**:
+
 ```csharp
 // Property available in System.Console
 bool isRedirected = Console.IsOutputRedirected;  // true if piped/redirected
@@ -115,18 +124,22 @@ bool isTerminal = !Console.IsOutputRedirected;   // true if interactive terminal
 ```
 
 **Behavior**:
+
 - Returns `true` when output is piped: `asciiart --color red "text" > output.txt`
 - Returns `true` when output is redirected: `asciiart --color red "text" | cat`
 - Returns `false` in interactive terminal: `asciiart --color red "text"`
 
 **ANSI Code Handling**:
+
 - When `Console.IsOutputRedirected == true`: .NET 6 automatically disables ANSI codes
 - Actual behavior: ANSI escape sequences are written to output as literal text (8 characters like `[31m`)
 - User problem: Files and pipes contain visible ANSI code artifacts
 
 **Decision**: ✅ **Explicitly strip ANSI codes when piped**
+
 - Rationale: Prevents malformed output in files; matches Unix philosophy (no invisible codes in stored output)
 - Implementation in `ConsoleOutput.cs`:
+
   ```csharp
   if (Console.IsOutputRedirected)
   {
@@ -168,8 +181,10 @@ bool isTerminal = !Console.IsOutputRedirected;   // true if interactive terminal
    - Cons: Adds external dependency; contradicts "no external dependencies" principle
 
 **Decision**: ✅ **Implement simple Levenshtein distance**
+
 - Rationale: Sufficient for 8 color names; no external dependencies; easy to test
 - Implementation:
+
   ```csharp
   public static int LevenshteinDistance(string s1, string s2)
   {
@@ -202,6 +217,7 @@ bool isTerminal = !Console.IsOutputRedirected;   // true if interactive terminal
 ### Findings
 
 **.NET 6 String Comparison**:
+
 ```csharp
 // Case-insensitive comparison (Ordinal = fastest, correct for color names)
 if ("Red".Equals(userInput, StringComparison.OrdinalIgnoreCase))
@@ -217,11 +233,13 @@ if (Enum.TryParse(userInput, ignoreCase: true, out ColorOption color))
 ```
 
 **Recommended Approach**:
+
 1. Define `ColorOption` as enum with lowercase names: `Red`, `Green`, `Blue`, etc.
 2. Use `Enum.TryParse()` with `ignoreCase: true`
 3. Fallback to Levenshtein distance if no exact match
 
 **Decision**: ✅ **Use Enum.TryParse with ignoreCase**
+
 - Rationale: Built-in, zero-dependency, idiomatic C#
 - Implementation: Define enum with standard capitalization; let TryParse handle case-insensitivity
 
