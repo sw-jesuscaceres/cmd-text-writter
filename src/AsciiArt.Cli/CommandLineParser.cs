@@ -1,5 +1,7 @@
 namespace AsciiArt.Cli;
 
+using AsciiArt.Core;
+
 /// <summary>
 /// Parses command-line arguments for the ASCII art CLI.
 /// </summary>
@@ -42,6 +44,26 @@ public sealed class CommandLineParser
 
                     index++;
                     options.FontName = safeArgs[index];
+                    break;
+                case "--color":
+                case "-c":
+                    if (index + 1 >= safeArgs.Length || safeArgs[index + 1].StartsWith("-", StringComparison.Ordinal))
+                    {
+                        options.IsValid = false;
+                        options.ErrorMessage = "Missing value for --color option.";
+                        return options;
+                    }
+
+                    index++;
+                    var colorString = safeArgs[index];
+                    if (!Enum.TryParse<ColorOption>(colorString, ignoreCase: true, out var parsedColor))
+                    {
+                        options.IsValid = false;
+                        options.ErrorMessage = $"Invalid color '{colorString}'. Valid colors: red, green, blue, yellow, magenta, cyan, white, black.";
+                        return options;
+                    }
+
+                    options.Color = parsedColor;
                     break;
                 default:
                     if (token.StartsWith("-", StringComparison.Ordinal))

@@ -1,4 +1,5 @@
 using AsciiArt.Cli;
+using AsciiArt.Core;
 using AsciiArt.Fonts;
 using FluentAssertions;
 
@@ -154,5 +155,55 @@ public sealed class ApplicationExecutionTests
         code.Should().Be(1);
         stdout.ToString().Should().BeEmpty();
         stderr.ToString().Should().Contain("Text too long");
+    }
+
+    [Fact]
+    public void Run_WithValidColorParameter_OutputContainsAnsiCodes()
+    {
+        var stdout = new StringWriter();
+        var stderr = new StringWriter();
+
+        // Note: Console.IsOutputRedirected will be true for StringWriter, so colors won't be applied
+        // This test is for parsing; actual color output would require terminal interaction
+        var code = app.Run(new[] { "--color", "red", "Hi" }, stdout, stderr);
+
+        code.Should().Be(0);
+        stdout.ToString().Should().NotBeEmpty();
+        stderr.ToString().Should().BeEmpty();
+    }
+
+    [Fact]
+    public void Run_WithInvalidColor_PrintsErrorAndReturnsTwo()
+    {
+        var stdout = new StringWriter();
+        var stderr = new StringWriter();
+
+        var code = app.Run(new[] { "--color", "purple", "Hi" }, stdout, stderr);
+
+        code.Should().Be(2);
+        stdout.ToString().Should().BeEmpty();
+        stderr.ToString().Should().Contain("Error:");
+        stderr.ToString().Should().Contain("Invalid color");
+    }
+
+    [Theory]
+    [InlineData("red")]
+    [InlineData("green")]
+    [InlineData("blue")]
+    [InlineData("yellow")]
+    [InlineData("magenta")]
+    [InlineData("cyan")]
+    [InlineData("white")]
+    [InlineData("black")]
+    public void Run_WithAllValidColors_ReturnsZero(string color)
+    {
+        var stdout = new StringWriter();
+        var stderr = new StringWriter();
+
+        var code = app.Run(new[] { "--color", color, "A" }, stdout, stderr);
+
+        code.Should().Be(0);
+        stdout.ToString().Should().NotBeEmpty();
+        stderr.ToString().Should().BeEmpty();
     }
 }

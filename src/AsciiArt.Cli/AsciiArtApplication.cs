@@ -101,7 +101,7 @@ public sealed class AsciiArtApplication
 
             foreach (var line in result.Lines)
             {
-                output.WriteLine(line);
+                output.WriteLineColored(line, options.Color);
             }
 
             foreach (var warning in result.Warnings)
