@@ -1,3 +1,5 @@
+using AsciiArt.Core;
+
 namespace AsciiArt.Cli;
 
 /// <summary>
@@ -44,4 +46,9 @@ public sealed class CommandLineOptions
     /// Gets or sets the text to render.
     /// </summary>
     public string? Text { get; set; }
+
+    /// <summary>
+    /// Gets or sets the optional color for text rendering.
+    /// </summary>
+    public ColorOption? Color { get; set; }
 }
